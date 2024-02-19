@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "616433425833",
+    "project_id": "isu-corp-test",
+    "storage_bucket": "isu-corp-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616433425833:android:1bf3aa26b1df477a3238b8",
+        "android_client_info": {
+          "package_name": "com.example.isu_corp_test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtL2KcJt52DN3Ozl7D0JZvlPnMM5Gs39Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
