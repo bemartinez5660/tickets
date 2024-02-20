@@ -73,6 +73,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
     ),
     const PopupMenuDivider(height: 4),
     const PopupMenuItem(
+      value: 'instructions',
+      child: Row(
+        children: [
+          SizedBox(
+              width: 22,
+              height: 22,
+              child: Icon(
+                Icons.info,
+                color: Colors.black,
+              )),
+          SizedBox(
+            width: 12,
+          ),
+          Text('Instructions'),
+        ],
+      ),
+    ),
+    const PopupMenuDivider(height: 4),
+    const PopupMenuItem(
       value: 'logout',
       child: Row(
         children: [
@@ -127,7 +146,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               // ));
                               showDialog(
                                   context: context,
-                                  builder: (context) => CalendarDialog(screen: screen,));
+                                  builder: (context) => CalendarDialog(
+                                        screen: screen,
+                                      ));
                             },
                             icon: Icon(
                               Icons.calendar_month,
@@ -190,17 +211,78 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ),
                             onSelected: (v) {
                               if (v == 'work_ticket') {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const WorkTicketScreen(),
-                                    ));
+                                if (ticketList.isNotEmpty) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const WorkTicketScreen(),
+                                      ));
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => const AlertDialog(
+                                      title: Text('Empty list'),
+                                      content: Text('Add a ticket.'),
+                                    ),
+                                  );
+                                }
                               } else if (v == 'get_directions') {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) =>
                                       const DirectionsScreen(),
                                 ));
+                              } else if (v == 'instructions') {
+                                showDialog(
+                                    context: context,
+                                    builder: (_) => const AlertDialog(
+                                          title: Text(
+                                            'Notes',
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          content: SizedBox(
+                                            height: 300,
+                                            child: Card(
+                                              child: Padding(
+                                                padding: EdgeInsets.all(10.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      '1- To delete or modify an item in the list, slide it sideways.',
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      '2- To update the list swipe down.',
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      ' 3- You can recover the password is working.',
+                                                      style: TextStyle(
+                                                        fontSize: 15,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Text(
+                                                      'Thank you very much for giving me the opportunity to take this test, I would be very proud to work for your company. \n Flutter Developer \n Bárbaro Enrique Martinez',
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ));
                               } else if (v == 'logout') {
                                 FirebaseAuth.instance
                                     .signOut()
