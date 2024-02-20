@@ -1,16 +1,5 @@
-# isu_corp_test
+Tickets is a concise Android app developed with Flutter, enabling efficient ticket management and seamless navigation. Integrated with Firebase Auth for secure login and registration, user data remains protected. Local SQLite storage ensures access to ticket lists, even offline.
 
-A new Flutter project.
+The user-friendly dashboard facilitates effortless ticket registration and management. With Google Maps API integration, Tickets offers advanced navigation, displaying ticket locations on an interactive map. Provider manages state, ensuring smooth communication between Firebase Auth, SQLite, and Google Maps API.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Users can easily navigate to selected tickets with the "Get Directions" screen. Tickets simplifies ticket management and navigation, making it an essential companion for any journey.
