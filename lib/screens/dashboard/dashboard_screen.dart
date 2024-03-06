@@ -1,8 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:isu_corp_test/environment.dart';
 import 'package:isu_corp_test/screens/directions/directions_screen.dart';
+import 'package:isu_corp_test/services/authentication/authentication_service.dart';
 import 'package:isu_corp_test/widgets/calendar/calendar_dialog.dart';
 import 'package:isu_corp_test/screens/work_ticket/work_ticket_screen.dart';
+import '../../services/calendar/google_calendar.dart' as google_calendar;
+import 'package:isu_corp_test/screens/google_calendar/google_calendar_screen.dart';
 import 'package:isu_corp_test/providers/tickets.dart';
 import 'package:isu_corp_test/widgets/dashboard/add_ticket/add_edit_ticket_modal.dart';
 import 'package:isu_corp_test/widgets/tickets_list/list_item.dart';
@@ -159,12 +162,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             tooltip: 'Sync with Google Calendar',
                             style: const ButtonStyle(
                                 elevation: MaterialStatePropertyAll(10)),
-                            onPressed: () {
+                            onPressed: () async {
                               // Just some tests to integrate the google calendar api
                               // but i havent enough time to complete it...
                               // Navigator.of(context).push(MaterialPageRoute(
                               //   builder: (context) => const CalendarScreen(),
                               // ));
+                              bool result =
+                                  await google_calendar.GoogleCalendar()
+                                      .exportToGoogleCalendar(
+                                          identifier: Environment.accessToken,
+                                          summary: "event name",
+                                          description: "event description",
+                                          startDateTime: DateTime.now(),
+                                          startTimeZone: "GMT+2:00",
+                                          endDateTime: DateTime.now()
+                                              .add(Duration(hours: 1)),
+                                          endTimeZone: "GMT+2:00");
+                              print(result);
                             },
                             icon: Icon(
                               Icons.sync,
@@ -284,7 +299,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                           ),
                                         ));
                               } else if (v == 'logout') {
-                                FirebaseAuth.instance
+                                AuthenticationService()
                                     .signOut()
                                     .then((value) => Navigator.pushReplacement(
                                         context,

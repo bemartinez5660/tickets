@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Returning the Dashboard Screen if the user is authenticated (if the
-    // idTokenChamges stream hasData)
+    // idTokenChanges stream hasData)
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.idTokenChanges(),
         builder: (context, snapshot) {
